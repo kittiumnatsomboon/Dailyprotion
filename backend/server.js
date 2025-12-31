@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const route = express.Router();
 const cors = require('cors');
+// dotenv
 require('dotenv').config();
-
-
+// mongodb
+require('./api/Mongodb')
 // cors production
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? [process.env.FRONTEND_URL_PROD] // e.g., "https://www.yourfrontend.com"
