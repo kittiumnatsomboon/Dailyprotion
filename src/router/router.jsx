@@ -1,6 +1,4 @@
-const { Children } = require("react");
-
-const router = [
+export const router = [
     {
         path:"/" , element:"navbar",
         children:[
