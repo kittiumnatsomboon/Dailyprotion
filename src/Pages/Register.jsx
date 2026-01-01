@@ -55,7 +55,7 @@ export default function Register() {
                                     setSubmitting(false);
                                 }}
                             >
-                                {({ errors, touched }) => (
+                                {({ errors, touched, values, setFieldValue }) => (
                                     <Form>
 
                                         <div className="space-y-4">
@@ -85,8 +85,8 @@ export default function Register() {
                                                     scrollableYearDropdown
                                                     showYearDropdown
                                                     showMonthDropdown
-                                                    selected={startDate}
-                                                    onChange={handleDateChange}
+                                                    selected={values.Dateofbirth || null}
+                                                    onChange={(date) => setFieldValue('Dateofbirth', date)}
                                                     dateFormat="MMMM d, yyyy"
                                                     name="Dateofbirth"
                                                 />
