@@ -8,6 +8,7 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import Footer from './Pages/Footer';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
