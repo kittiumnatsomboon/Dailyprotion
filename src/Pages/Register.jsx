@@ -16,8 +16,8 @@ const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร.')
         .required('กรุณาระบุรหัสผ่าน'),
-    Dateofbirth:Yup.date()
-    .typeError('รูปแบบวันเดือนปีผิด'),
+    Dateofbirth: Yup.date()
+        .typeError('รูปแบบวันเดือนปีผิด'),
     confirmpassword: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
         .required('กรุณาระบุรหัสผ่าน'),
@@ -47,7 +47,7 @@ export default function Register() {
                         <div></div>
                         <div className="p-8">
                             <Formik
-                                initialValues={{ fullname: '',Dateofbirth:'', email: '', password: '' , confirmpassword:'' }}
+                                initialValues={{ fullname: '', Dateofbirth: '', email: '', password: '', confirmpassword: '' }}
                                 validationSchema={SignupSchema} // Pass the schema here
                                 onSubmit={(values, { setSubmitting }) => {
                                     // Handle form submission
@@ -86,8 +86,14 @@ export default function Register() {
                                                     showYearDropdown
                                                     showMonthDropdown
                                                     selected={values.Dateofbirth || null}
-                                                    onChange={(date) => setFieldValue('Dateofbirth', date)}
-                                                    dateFormat="MMMM d, yyyy"
+                                                    onChange={
+                                                        (date) =>
+                                                            setFieldValue(
+                                                                'Dateofbirth',
+                                                                date
+                                                            )
+                                                    }
+                                                    dateFormat="yyyy-MM-dd"
                                                     name="Dateofbirth"
                                                 />
                                                 {errors.Dateofbirth && touched.Dateofbirth ? (
