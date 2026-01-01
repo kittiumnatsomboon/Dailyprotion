@@ -1,32 +1,32 @@
 import Button from "../Component/Butoon"
-import Datepicker from "../Component/Datepicker"
-import Inputtextcomponent from "../Component/Input_textcomponent"
 import * as Yup from 'yup';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { useState } from "react";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const SignupSchema = Yup.object().shape({
     fullname: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('Required'), //
+        .required('กรุณาระบุชื่อ-นามสกุล'), //
     email: Yup.string()
-        .email('Invalid email')
-        .required('Required'), //
+        .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
+        .required('กรุณาระบุอีเมลล์'), //
     password: Yup.string()
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .required('Required'),
+        .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร.')
+        .required('กรุณาระบุรหัสผ่าน'),
     confirmpassword: Yup.string()
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .required('Required'),
+        .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
+        .required('กรุณาระบุรหัสผ่าน'),
 });
 
-
-
-
-
 export default function Register() {
+    const [startDate, setStartDate] = useState(new Date());
+    const handleDateChange = (date) => {
+        setStartDate(date);
+        console.log(startDate)
+    };
     return (
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
@@ -57,59 +57,82 @@ export default function Register() {
                                     <Form>
 
                                         <div className="space-y-4">
-                                            <div className="pb-2">
+                                            <div className="">
                                                 <p className="text-white">ชื่อ-นามสกุล:</p>
                                                 <Field
                                                     className="w-full px-4 py-2.5 text-sm
-                                        border border-gray-300 rounded-md
-                                        hover:border-indigo-400
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                                        transition duration-200"
+                                                    border border-gray-300 rounded-md
+                                                    hover:border-indigo-400
+                                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                    transition duration-200"
                                                     name="fullname" placeholder="กรุณาระบุชื่อ-นามสกุล" type="text" />
                                                 {errors.fullname && touched.fullname ? (
                                                     <div className="text-red-500">{errors.fullname}</div>
                                                 ) : null}
                                             </div>
-                                            <div className="pb-2">
+                                            <div className="">
                                                 <p className="text-white">วันเดือนปีเกิด :</p>
-                                                <Datepicker name="" />
+                                                <DatePicker
+                                                    className="w-full px-4 py-2.5 text-sm
+                                                                border border-gray-300 rounded-md
+                                                                hover:border-indigo-400
+                                                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                                transition duration-200"
+                                                    placeholderText="กรุณาระบุวันเดือนปีเกิด"
+                                                    yearDropdownItemNumber={100}
+                                                    scrollableYearDropdown
+                                                    showYearDropdown
+                                                    showMonthDropdown
+                                                    selected={startDate}
+                                                    onChange={handleDateChange}
+                                                    dateFormat="MMMM d, yyyy"
+                                                    name="Dateofbirth"
+                                                />
                                             </div>
-                                            <div className="pb-2">
+                                            <div className="">
                                                 <p className="text-white">ที่อยู่อีเมลล์:</p>
                                                 <Field
                                                     className="w-full px-4 py-2.5 text-sm
-                                        border border-gray-300 rounded-md
-                                        hover:border-indigo-400
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                                        transition duration-200"
+                                                    border border-gray-300 rounded-md
+                                                    hover:border-indigo-400
+                                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                    transition duration-200"
                                                     name="email" placeholder="กรุณาที่อยู่อีเมลล์" type="email" />
 
-                                                <ErrorMessage name="email" component="div" />
+                                                {errors.email && touched.email ? (
+                                                    <div className="text-red-500">{errors.email}</div>
+                                                ) : null}
 
                                             </div>
-                                            <div className="pb-2">
+                                            <div className="">
                                                 <p className="text-white">รหัสผ่าน:</p>
                                                 <Field
                                                     className="w-full px-4 py-2.5 text-sm
-                                        border border-gray-300 rounded-md
-                                        hover:border-indigo-400
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                                        transition duration-200"
+                                                    border border-gray-300 rounded-md
+                                                    hover:border-indigo-400
+                                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                    transition duration-200"
                                                     name="password" placeholder="กรุณารหัสผ่าน" type="password" />
 
                                             </div>
-                                            <div className="pb-2">
+                                            {errors.password && touched.password ? (
+                                                <div className="text-red-500">{errors.password}</div>
+                                            ) : null}
+                                            <div className="">
                                                 <p className="text-white">ยืนยันรหัสผ่าน:</p>
                                                 <Field
                                                     className="
-                                        w-full px-4 py-2.5 text-sm
-                                        border border-gray-300 rounded-md
-                                        hover:border-indigo-400
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                                        transition duration-200"
+                                                    w-full px-4 py-2.5 text-sm
+                                                    border border-gray-300 rounded-md
+                                                    hover:border-indigo-400
+                                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                    transition duration-200"
                                                     name="confirmpassword" placeholder="กรุณายืนยันรหัสผ่าน" type="password" />
 
                                             </div>
+                                            {errors.confirmpassword && touched.confirmpassword ? (
+                                                <div className="text-red-500">{errors.confirmpassword}</div>
+                                            ) : null}
                                             <div className="pb-2 text-center">
                                                 <Button name="btnregister" type="submit">
                                                     สมัครสมาชิก
