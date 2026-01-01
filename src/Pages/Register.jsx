@@ -52,7 +52,7 @@ export default function Register() {
                                 onSubmit={async (values, { setSubmitting }) => {
                                     // Handle form submission
                                     const res = await fetch('http://localhost:5000/api/register/',{
-                                        method:'POST',
+                                        method:'GET',
                                         headers: {
                                         'Content-Type': 'application/json', // บอกเซิร์ฟเวอร์ว่าส่งข้อมูล JSON
                                         },
