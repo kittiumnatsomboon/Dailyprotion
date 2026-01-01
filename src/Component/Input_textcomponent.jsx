@@ -1,5 +1,5 @@
 
-export default function Inputtextcomponent({type,placeholder,label}) {
+export default function Inputtextcomponent({type,placeholder,name}) {
     return (
         <>
             <input
@@ -10,7 +10,7 @@ export default function Inputtextcomponent({type,placeholder,label}) {
                 hover:border-indigo-400
                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
                 transition duration-200"
-                name={label}
+                name={name}
             />
         </>
     )

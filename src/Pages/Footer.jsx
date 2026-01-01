@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Requires
 
 const Footer = () => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
 
         <footer className="bg-gray-800 text-white mt-10">
         <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
