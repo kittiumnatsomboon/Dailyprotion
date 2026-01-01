@@ -49,10 +49,16 @@ export default function Register() {
                             <Formik
                                 initialValues={{ fullname: '', Dateofbirth: '', email: '', password: '', confirmpassword: '' }}
                                 validationSchema={SignupSchema} // Pass the schema here
-                                onSubmit={(values, { setSubmitting }) => {
+                                onSubmit={async (values, { setSubmitting }) => {
                                     // Handle form submission
-                                    alert(JSON.stringify(values, null, 2));
-                                    setSubmitting(false);
+                                    const res = await fetch('http://localhost:5000/api/register/',{
+                                        method:'POST',
+                                        headers: {
+                                        'Content-Type': 'application/json', // บอกเซิร์ฟเวอร์ว่าส่งข้อมูล JSON
+                                        },
+                                        body: JSON.stringify(values)
+                                    })
+                                    console.log(res.data);
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
