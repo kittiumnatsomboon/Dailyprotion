@@ -16,6 +16,8 @@ const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร.')
         .required('กรุณาระบุรหัสผ่าน'),
+    Dateofbirth:Yup.date()
+    .typeError('รูปแบบวันเดือนปีผิด'),
     confirmpassword: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
         .required('กรุณาระบุรหัสผ่าน'),
@@ -45,7 +47,7 @@ export default function Register() {
                         <div></div>
                         <div className="p-8">
                             <Formik
-                                initialValues={{ fullname: '', email: '', password: '' }}
+                                initialValues={{ fullname: '',Dateofbirth:'', email: '', password: '' , confirmpassword:'' }}
                                 validationSchema={SignupSchema} // Pass the schema here
                                 onSubmit={(values, { setSubmitting }) => {
                                     // Handle form submission
@@ -88,6 +90,9 @@ export default function Register() {
                                                     dateFormat="MMMM d, yyyy"
                                                     name="Dateofbirth"
                                                 />
+                                                {errors.Dateofbirth && touched.Dateofbirth ? (
+                                                    <div className="text-red-500">{errors.Dateofbirth}</div>
+                                                ) : null}
                                             </div>
                                             <div className="">
                                                 <p className="text-white">ที่อยู่อีเมลล์:</p>
