@@ -18,8 +18,8 @@ CREATE TABLE userimage(
     user_id int(6),
     FOREIGN KEY (user_id) 
     REFERENCES users(userid)
-    ON DELETE CASCADE,
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT DATETIME,
     DELETED_AT DATETIME
@@ -66,7 +66,7 @@ CREATE TABLE blogofpost(
     catagory_id INT(6),
     -- FK tage_id    
     tag_id INT(6),
-    blogofpost_id INT UNSIGNEDPRIMARY KEY AUTO_INCREMENT,
+    blogofpost_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     summary varchar(1000) NOT NULL,
     description varchar(20000) NOT NULL,
     statusofblog enum('drap','public','private','deleted') NOT NULL,
@@ -75,6 +75,9 @@ CREATE TABLE blogofpost(
     DELETED_AT DATETIME
 )ENGINE=InnoDB;
 
-
+blog_tag (
+   blog_id,
+   tag_id
+)
 
 
