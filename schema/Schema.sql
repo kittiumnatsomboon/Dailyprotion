@@ -15,11 +15,9 @@ CREATE TABLE userimage(
     nameimage varchar(255) NOT NULL,
     pathimage varchar(255) NOT NULL,
     user_id int(6),
-    -- FK 
-    FOREIGN KEY (user_id) REFERENCES users(userid)
-    -- เมื่อลบห้ามมีการทำอะไรกับตารางPK
+    FOREIGN KEY (user_id) 
+    REFERENCES users(userid)
     ON DELETE CASCADE,
-    -- อัพเดทเมื่อ PK อัพเดทจะไม่มีอะไรเกิดกับตารางลูก
     ON UPDATE NO ACTION,
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT DATETIME,
