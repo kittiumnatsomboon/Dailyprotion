@@ -26,7 +26,7 @@ CREATE TABLE userimage(
 )ENGINE=InnoDB;
 
 
--- 29ลงไปยังไม่ได้สร้างตาราง
+-- 29ลงไปยังไม่ได้สร้างตารางรอ FK Case , Restric, NO ACTION
 -- catagory content table
 CREATE TABLE catagory(
     catagory_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
