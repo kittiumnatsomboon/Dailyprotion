@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors({
   origin: 'http://localhost:5173' // Specify the allowed origin and port
 }));
-// testconnection
+// success
 // app.use('/api/connectdb/',require('./api/Testconnection'))
 
 
