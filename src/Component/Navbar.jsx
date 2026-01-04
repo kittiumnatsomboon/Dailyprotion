@@ -16,7 +16,7 @@ export default function Navbar() {
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Logo/Brand */}
                     <a href="/" className="text-white text-lg font-semibold">
-                        Daily-Blocker
+                        Daily-today
                     </a>
 
                     {/* Desktop Menu (hidden on mobile) */}
