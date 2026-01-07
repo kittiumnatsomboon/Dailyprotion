@@ -58,13 +58,9 @@ CREATE TABLE imageofblog(
 )ENGINE=InnoDB;
 -- table blogofpost
 CREATE TABLE blogofpost(
-    -- FK users
     user_id INT(6),
-    -- FK imageofblog
     image_id INT(6),
-    -- FK catagory_id
     catagory_id INT(6),
-    -- FK tage_id    
     tag_id INT(6),
     blogofpost_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     summary varchar(1000) NOT NULL,
