@@ -176,9 +176,7 @@ export default function Register() {
                                                 <div className="text-red-500">{errors.confirmpassword}</div>
                                             ) : null}
                                             <div className="pb-2 text-center text-green-500">
-                                                    {message || message.error (
-                                                        {message}
-                                                    )}
+                                                    {message}
                                                 <Button name="btnregister" type="submit">
                                                     สมัครสมาชิก
                                                 </Button>
