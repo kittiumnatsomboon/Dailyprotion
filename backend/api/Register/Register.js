@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../Connectmysql');
 const bcryptjs = require('bcryptjs');
-const Sendmailregister = require('./Sendmail')
 
 router.post('/', async (req, res) => {
     const { firstname, lastname, Dateofbirth, email, password } = req.body;
