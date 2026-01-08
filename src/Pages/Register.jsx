@@ -6,10 +6,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SignupSchema = Yup.object().shape({
-    fullname: Yup.string()
+    firstname: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('กรุณาระบุชื่อ-นามสกุล'), //
+        .required('กรุณาระบุชื่อ'), //
+    lastname: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('กรุณาระบุนามสกุล'), //
     email: Yup.string()
         .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
         .required('กรุณาระบุอีเมลล์'), //
@@ -52,18 +56,19 @@ export default function Register() {
                         <div></div>
                         <div className="p-8">
                             <Formik
-                                initialValues={{ fullname: '', Dateofbirth: '', email: '', password: '', confirmpassword: '' }}
+                                initialValues={{ firstname: '',lastname: '', Dateofbirth: '', email: '', password: '', confirmpassword: '' }}
                                 validationSchema={SignupSchema} // Pass the schema here
                                 onSubmit={async (values, { setSubmitting }) => {
                                     // Handle form submission
                                     const res = await fetch('http://localhost:5000/api/register/',{
-                                        method:'GET',
+                                        method:'POST',
                                         headers: {
                                         'Content-Type': 'application/json', // บอกเซิร์ฟเวอร์ว่าส่งข้อมูล JSON
                                         },
                                         body: JSON.stringify(values)
                                     })
-                                    console.log(res.data);
+                                    const data = await res.json();
+                                    console.log(data)
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
@@ -71,16 +76,29 @@ export default function Register() {
 
                                         <div className="space-y-4">
                                             <div className="">
-                                                <p className="text-white">ชื่อ-นามสกุล:</p>
+                                                <p className="text-white">ชื่อ:</p>
                                                 <Field
                                                     className="w-full px-4 py-2.5 text-sm
                                                     border border-gray-300 rounded-md
                                                     hover:border-indigo-400
                                                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
                                                     transition duration-200"
-                                                    name="fullname" placeholder="กรุณาระบุชื่อ-นามสกุล" type="text" />
-                                                {errors.fullname && touched.fullname ? (
-                                                    <div className="text-red-500">{errors.fullname}</div>
+                                                    name="firstname" placeholder="กรุณาระบุชื่อ-นามสกุล" type="text" />
+                                                {errors.firstname && touched.firstname ? (
+                                                    <div className="text-red-500">{errors.firstname}</div>
+                                                ) : null}
+                                            </div>
+                                            <div className="">
+                                                <p className="text-white">นามสกุล:</p>
+                                                <Field
+                                                    className="w-full px-4 py-2.5 text-sm
+                                                    border border-gray-300 rounded-md
+                                                    hover:border-indigo-400
+                                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                                                    transition duration-200"
+                                                    name="lastname" placeholder="กรุณาระบุชื่อ-นามสกุล" type="text" />
+                                                {errors.lastname && touched.lastname ? (
+                                                    <div className="text-red-500">{errors.lastname}</div>
                                                 ) : null}
                                             </div>
                                             <div className="">

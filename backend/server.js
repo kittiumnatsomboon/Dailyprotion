@@ -12,7 +12,8 @@ app.use(cors({
 // app.use('/api/connectdb/',require('./api/Testconnection'))
 
 
-
+// Register API
+app.use('/api/register/',require('./api/Register/Register'))
 
 app.get('/', (req, res) => {
   res.json({ message: 'Data from secure API!' });
