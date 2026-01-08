@@ -38,6 +38,7 @@ export default function Register() {
         setStartDate(date);
         console.log(startDate)
     };
+    const [message, setMessage] = useState('');
     return (
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
@@ -67,8 +68,9 @@ export default function Register() {
                                         },
                                         body: JSON.stringify(values)
                                     })
-                                    const data = await res.json();
-                                    console.log(data)
+                                    const respone = await res.json();
+                                    setMessage(respone.message || respone.error)
+                                    
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
@@ -173,7 +175,10 @@ export default function Register() {
                                             {errors.confirmpassword && touched.confirmpassword ? (
                                                 <div className="text-red-500">{errors.confirmpassword}</div>
                                             ) : null}
-                                            <div className="pb-2 text-center">
+                                            <div className="pb-2 text-center text-green-500">
+                                                    {message || message.error (
+                                                        {message}
+                                                    )}
                                                 <Button name="btnregister" type="submit">
                                                     สมัครสมาชิก
                                                 </Button>

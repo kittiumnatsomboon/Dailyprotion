@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
         console.error(err);
-        res.status(500).send('Database error');
+        res.status(500).json({message:'การเชื่อมต่อฐานข้อมูลผิดพลาด โปรดลองใหม่ภายหลัง'});
     }
 });
 
