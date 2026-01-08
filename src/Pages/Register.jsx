@@ -45,7 +45,7 @@ export default function Register() {
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
                 <div className="w-full md:w-1/2">
-                    <img src="images/Register.jpg" />
+                    <img src="images/Register.jpg" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-1/2 bg-gradient-to-r from-violet-500 to-violet-900 p-4">
                     <div className="text-center text-white">

@@ -4,7 +4,8 @@ import { Formik, Field, Form } from 'formik';
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import Googlebutton from "../Component/Googlebutton";
+import Facebookbutton from "../Component/Facebookbutton";
 const SigninSchema = Yup.object().shape({
     email: Yup.string()
         .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
@@ -22,11 +23,11 @@ export default function Login() {
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
                 <div className="w-full md:w-1/2">
-                    <img src="images/Register.jpg" />
+                    <img src="images/Login.png" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-1/2 bg-gradient-to-r from-violet-500 to-violet-900 p-4">
                     <div className="text-center text-white">
-                        <p className="text-2xl">สมัครสมาชิก</p>
+                        <p className="text-2xl">เข้าสู่ระบบ</p>
                         <p className="text-base">
                             กรุณาเข้าสู่ระบบเพื่อใช้งานฟีเจอร์ต่าง ๆ ของระบบ
                             ข้อมูลของคุณจะถูกเก็บรักษาอย่างปลอดภัย
@@ -36,7 +37,7 @@ export default function Login() {
                         <div></div>
                         <div className="p-8">
                             <Formik
-                                initialValues={{  email: '', password: '' }}
+                                initialValues={{ email: '', password: '' }}
                                 validationSchema={SigninSchema} // Pass the schema here
                                 onSubmit={async (values, { setSubmitting }) => {
                                     // Handle form submission
@@ -89,6 +90,14 @@ export default function Login() {
                                                 <Button name="btnregister" type="submit">
                                                     เข้าสู่ระบบ
                                                 </Button>
+                                                <div className="pt-2 pb-2">
+                                                    or
+                                                </div>
+                                                <div>
+                                                    {/* Google login */}
+                                                    <Googlebutton/>
+                                                    <Facebookbutton/>
+                                                </div>
                                             </div>
 
                                         </div>
