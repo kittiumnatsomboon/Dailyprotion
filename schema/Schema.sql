@@ -28,10 +28,10 @@ CREATE TABLE userimage(
 
 -- 29ลงไปยังไม่ได้สร้างตารางรอ FK Case , Restric, NO ACTION
 -- catagory content table
-CREATE TABLE catagory(
-    catagory_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    nameofcatagory varchar(1000) NOT NULL,
-    description varchar(20000) NOT NULL,
+CREATE TABLE category(
+    category_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nameofcategory varchar(1000) NOT NULL,
+    description varchar(10000) NOT NULL,
     status enum('public','drap','private','delete') NOT NULL,
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT DATETIME,
@@ -42,7 +42,7 @@ CREATE TABLE tag(
     tag_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nameoftag varchar(1000) NOT NULL,
     description varchar(1000) NOT NULL,
-    status enum('public','drap','private','delete') NOT NULL,
+    status enum('public','draft','private','delete') NOT NULL,
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT DATETIME,
     DELETED_AT DATETIME
@@ -57,19 +57,32 @@ CREATE TABLE imageofblog(
     DELETED_AT DATETIME
 )ENGINE=InnoDB;
 -- table blogofpost
-CREATE TABLE blogofpost(
-    user_id INT(6),
-    image_id INT(6),
-    catagory_id INT(6),
-    tag_id INT(6),
-    blogofpost_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    summary varchar(1000) NOT NULL,
-    description varchar(20000) NOT NULL,
-    statusofblog enum('drap','public','private','deleted') NOT NULL,
-    CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UPDATED_AT DATETIME,
-    DELETED_AT DATETIME
-)ENGINE=InnoDB;
+CREATE TABLE blogofpost (
+    blogofpost_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    image_id INT NOT NULL,
+    category_id INT NOT NULL,
+    tag_id INT,
+    summary VARCHAR(1000) NOT NULL,
+    description VARCHAR(15000) NOT NULL,
+    statusofblog ENUM('draft','public','private','deleted') NOT NULL DEFAULT 'draft',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at DATETIME,
+    CONSTRAINT fk_blog_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(userid)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_blog_image
+        FOREIGN KEY (image_id)
+        REFERENCES imageofblog(image_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_blog_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 
 blog_tag (
    blog_id,
