@@ -15,12 +15,17 @@ const SignupSchema = Yup.object().shape({
         .required('กรุณาระบุอีเมลล์'), //
     password: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร.')
-        .required('กรุณาระบุรหัสผ่าน'),
+        .required('กรุณาระบุรหัสผ่าน')
+        .matches(/[A-Z]/, 'รหัสผ่านต้องมีอักษรตัวใหญ่.')
+        .matches(/[0-9]/, 'รหัสผ่านต้องมีตัวเลข.'),
     Dateofbirth: Yup.date()
         .typeError('รูปแบบวันเดือนปีผิด'),
     confirmpassword: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
-        .required('กรุณาระบุรหัสผ่าน'),
+        .required('กรุณาระบุรหัสผ่าน')
+        .matches(/[A-Z]/, 'รหัสผ่านต้องมีอักษรตัวใหญ่.')
+        .matches(/[0-9]/, 'รหัสผ่านต้องมีตัวเลข.') 
+        .oneOf([Yup.ref('password'), null], 'รหัสผ่านต้องตรงกัน'),
 });
 
 export default function Register() {
