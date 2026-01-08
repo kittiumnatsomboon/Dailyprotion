@@ -7,12 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const SignupSchema = Yup.object().shape({
     firstname: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
+        .min(2, 'ชื่อขั้นต่ำ 2 ตัวอักษรขึ้นไป')
+        .max(50, 'ชื่อสิ้นสุดที่ 50 ตัวอักษร')
         .required('กรุณาระบุชื่อ'), //
     lastname: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
+        .min(2, 'นามสกุลขั้นต่ำ 2 ตัวอักษรขึ้นไป')
+        .max(50, 'นามสกุลสิ้นสุดที่ 50 ตัวอักษร')
         .required('กรุณาระบุนามสกุล'), //
     email: Yup.string()
         .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
@@ -128,9 +128,6 @@ export default function Register() {
                                                     }
                                                     dateFormat="yyyy-MM-dd"
                                                     name="Dateofbirth"
-                                                    // onBlur={() => {
-                                                    //     setFieldTouched('Dateofbirth', true);
-                                                    // }}
                                                 />
                                                 {touched.Dateofbirth && errors.Dateofbirth && (
                                                     <div className="text-red-500 text-sm mt-1">
