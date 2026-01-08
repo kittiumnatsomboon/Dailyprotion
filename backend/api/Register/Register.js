@@ -16,8 +16,6 @@ router.post('/', async (req, res) => {
         await pool.query('INSERT INTO users (firstname,lastname,Dateofbirth,email, password) VALUES (?,?,?,?,?)', 
             [firstname , lastname ,dateOnly,email,hashedPassword]);
             // ส่งเมลล์หลังสมัคร
-        await Sendmailregister(email, firstname);
-        // console.log(Sendmailregister)
         res.status(201).json({ message: 'สมัครสมาชิกสำเร็จ' });
     } catch (err) {
         console.error(err);
