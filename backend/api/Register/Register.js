@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         const dateOnly = Dateofbirth.split('T')[0];
         await pool.query('INSERT INTO users (firstname,lastname,Dateofbirth,email, password) VALUES (?,?,?,?,?)', 
             [firstname , lastname ,dateOnly,email,hashedPassword]);
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'สมัครสมาชิกสำเร็จ' });
     } catch (err) {
         console.error(err);
         res.status(500).json({message:'การเชื่อมต่อฐานข้อมูลผิดพลาด โปรดลองใหม่ภายหลัง'});

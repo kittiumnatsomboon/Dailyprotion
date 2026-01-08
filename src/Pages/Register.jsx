@@ -22,13 +22,15 @@ const SignupSchema = Yup.object().shape({
         .required('กรุณาระบุรหัสผ่าน')
         .matches(/[A-Z]/, 'รหัสผ่านต้องมีอักษรตัวใหญ่.')
         .matches(/[0-9]/, 'รหัสผ่านต้องมีตัวเลข.'),
-    Dateofbirth: Yup.date()
-        .typeError('รูปแบบวันเดือนปีผิด'),
+    Dateofbirth: Yup
+        .date()
+        .nullable()
+        .required('กรุณาระบุวันเดือนปีเกิด'),
     confirmpassword: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
         .required('กรุณาระบุรหัสผ่าน')
         .matches(/[A-Z]/, 'รหัสผ่านต้องมีอักษรตัวใหญ่.')
-        .matches(/[0-9]/, 'รหัสผ่านต้องมีตัวเลข.') 
+        .matches(/[0-9]/, 'รหัสผ่านต้องมีตัวเลข.')
         .oneOf([Yup.ref('password'), null], 'รหัสผ่านต้องตรงกัน'),
 });
 
@@ -57,20 +59,20 @@ export default function Register() {
                         <div></div>
                         <div className="p-8">
                             <Formik
-                                initialValues={{ firstname: '',lastname: '', Dateofbirth: '', email: '', password: '', confirmpassword: '' }}
+                                initialValues={{ firstname: '', lastname: '', Dateofbirth: null, email: '', password: '', confirmpassword: '' }}
                                 validationSchema={SignupSchema} // Pass the schema here
                                 onSubmit={async (values, { setSubmitting }) => {
                                     // Handle form submission
-                                    const res = await fetch('http://localhost:5000/api/register/',{
-                                        method:'POST',
+                                    const res = await fetch('http://localhost:5000/api/register/', {
+                                        method: 'POST',
                                         headers: {
-                                        'Content-Type': 'application/json', // บอกเซิร์ฟเวอร์ว่าส่งข้อมูล JSON
+                                            'Content-Type': 'application/json', // บอกเซิร์ฟเวอร์ว่าส่งข้อมูล JSON
                                         },
                                         body: JSON.stringify(values)
                                     })
                                     const respone = await res.json();
                                     setMessage(respone.message || respone.error)
-                                    
+
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
@@ -126,10 +128,15 @@ export default function Register() {
                                                     }
                                                     dateFormat="yyyy-MM-dd"
                                                     name="Dateofbirth"
+                                                    onBlur={() => {
+                                                        setFieldTouched('Dateofbirth', true);
+                                                    }}
                                                 />
-                                                {errors.Dateofbirth && touched.Dateofbirth ? (
-                                                    <div className="text-red-500">{errors.Dateofbirth}</div>
-                                                ) : null}
+                                                {touched.Dateofbirth && errors.Dateofbirth && (
+                                                    <div className="text-red-500 text-sm mt-1">
+                                                        {errors.Dateofbirth}
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className="">
                                                 <p className="text-white">ที่อยู่อีเมลล์:</p>
@@ -176,7 +183,7 @@ export default function Register() {
                                                 <div className="text-red-500">{errors.confirmpassword}</div>
                                             ) : null}
                                             <div className="pb-2 text-center text-green-500">
-                                                    {message}
+                                                {message}
                                                 <Button name="btnregister" type="submit">
                                                     สมัครสมาชิก
                                                 </Button>
