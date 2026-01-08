@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../Connectmysql');
 const bcryptjs = require('bcryptjs');
+const Sendmailregister = require('./Sendmail')
+
 router.post('/', async (req, res) => {
     const { firstname, lastname, Dateofbirth, email, password } = req.body;
     
@@ -14,6 +16,9 @@ router.post('/', async (req, res) => {
         const dateOnly = Dateofbirth.split('T')[0];
         await pool.query('INSERT INTO users (firstname,lastname,Dateofbirth,email, password) VALUES (?,?,?,?,?)', 
             [firstname , lastname ,dateOnly,email,hashedPassword]);
+            // ส่งเมลล์หลังสมัคร
+        await Sendmailregister(email, firstname);
+        // console.log(Sendmailregister)
         res.status(201).json({ message: 'สมัครสมาชิกสำเร็จ' });
     } catch (err) {
         console.error(err);

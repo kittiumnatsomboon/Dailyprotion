@@ -128,9 +128,9 @@ export default function Register() {
                                                     }
                                                     dateFormat="yyyy-MM-dd"
                                                     name="Dateofbirth"
-                                                    onBlur={() => {
-                                                        setFieldTouched('Dateofbirth', true);
-                                                    }}
+                                                    // onBlur={() => {
+                                                    //     setFieldTouched('Dateofbirth', true);
+                                                    // }}
                                                 />
                                                 {touched.Dateofbirth && errors.Dateofbirth && (
                                                     <div className="text-red-500 text-sm mt-1">
