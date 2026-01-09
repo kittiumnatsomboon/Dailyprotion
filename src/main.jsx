@@ -9,9 +9,12 @@ import Contact from './Pages/Contact';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Footer from './Pages/Footer';
+import { AuthProvider } from './Authen/auth';
+import AdminDashboard from './Pages/Controller/AdminDashboard';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<Navbar/>}>
           <Route index element={<Home />} />
@@ -19,8 +22,11 @@ createRoot(document.getElementById('root')).render(
           <Route path="contact" element={<Contact />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          
+          <Route path="admin/dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>
+    </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 )

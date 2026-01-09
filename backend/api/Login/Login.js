@@ -23,14 +23,24 @@ router.post('/', async (req, res) => {
                     usertype: user.usertype // e.g., 'admin', 'user'
                 };
                 // 3. Sign the token
-                const token = jwt.sign(payload,process.env.SECRET, { expiresIn: '1h' });
-                res.status(201).json({ message: 'เข้าสู่ระบบสำเร็จ',token});
+                const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
+                res.status(201).json({
+                    message: 'เข้าสู่ระบบสำเร็จ', 
+                    token,
+                    users: {
+                        userid: user.userid,
+                        email: user.email,
+                        firstname: user.firstname,
+                        lastname: user.lastname,
+                        usertype: user.usertype
+                    }
+                });
             } else {
                 res.status(401).json({ message: 'Invalid credentials' });
             }
 
         } else {
-            res.status(404).json({message:'User not found'});
+            res.status(404).json({ message: 'User not found' });
         }
     } catch (err) {
         console.error(err);

@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Googlebutton from "../Component/Googlebutton";
 import Facebookbutton from "../Component/Facebookbutton";
+import { AuthProvider, useAuth } from "../Authen/auth";
 const SigninSchema = Yup.object().shape({
     email: Yup.string()
         .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
@@ -19,6 +20,7 @@ const SigninSchema = Yup.object().shape({
 
 export default function Login() {
     const [message, setMessage] = useState('');
+    const{login} = useAuth();
     return (
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
@@ -50,8 +52,9 @@ export default function Login() {
                                     })
                                     const respone = await res.json();
                                     setMessage(respone.message || respone.error)
-                                    // Set ไว้ก่อนรอ Set Token usecontext
-                                    localStorage.setItem("token", respone.token)
+                                    // set token login , resp users
+                                    login(respone.token, respone.users);
+                                    
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
