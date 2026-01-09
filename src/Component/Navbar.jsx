@@ -8,10 +8,8 @@ export default function Navbar() {
         { name: 'หน้าแรก', href: '/' },
         { name: 'เกี่ยวกับเรา', href: '/about' },
         { name: 'ติดต่อเรา', href: '/contact' },
-        { name: 'สมัครสมาชิก', href: '/register' },
-        { name: 'เข้าสู่ระบบ', href: '/login' },
     ];
-    const{login , logout} = useAuth();
+    const { user, logout } = useAuth();
     return (
         <>
             <nav className="bg-gradient-to-r from-violet-500 to-violet-900 p-4">
@@ -32,6 +30,24 @@ export default function Navbar() {
                                 {link.name}
                             </a>
                         ))}
+                        {user ? (
+                            <>
+                                {/* Display the user's name */}
+                                <Link to=""
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                >{user.firstname}</Link>
+                            </>
+                        ) : (
+                            <>
+                                {/* Display login/signup links */}
+                                <Link to="/register"
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                >สมัครสมาชิก</Link>
+                                <Link to="/login"
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                >เข้าสู่ระบบ</Link>
+                            </>
+                        )}
                     </div>
 
                     {/* Mobile Menu Button (hidden on desktop) */}
@@ -58,6 +74,24 @@ export default function Navbar() {
                                 {link.name}
                             </a>
                         ))}
+                        {user ? (
+                            <>
+                                {/* Display the user's name */}
+                                <Link to=""
+                                    className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                                >{user.firstname}</Link>
+                            </>
+                        ) : (
+                            <>
+                                {/* Display login/signup links */}
+                                <Link to="/register"
+                                    className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                                >สมัครสมาชิก</Link>
+                                <Link to="/login"
+                                    className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                                >เข้าสู่ระบบ</Link>
+                            </>
+                        )}
                     </div>
                 )}
             </nav>
