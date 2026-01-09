@@ -44,12 +44,12 @@ export default function Login() {
                                     const res = await fetch('http://localhost:5000/api/login/', {
                                         method: 'POST',
                                         headers: {
-                                            Authorization: `Bearer ${localStorage.getItem("token")}`
+                                            'Content-Type': 'application/json',
                                         },
                                         body: JSON.stringify(values)
                                     })
-                                    // const respone = await res.json();
-
+                                    const respone = await res.json();
+                                    setMessage(respone.message || respone.error)
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
