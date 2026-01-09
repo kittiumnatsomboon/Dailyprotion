@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
             }
 
         } else {
-            res.status(404).send('User not found');
+            res.status(404).json({message:'User not found'});
         }
     } catch (err) {
         console.error(err);
