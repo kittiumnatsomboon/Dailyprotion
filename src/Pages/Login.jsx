@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Googlebutton from "../Component/Googlebutton";
 import Facebookbutton from "../Component/Facebookbutton";
 import { AuthProvider, useAuth } from "../Authen/auth";
+import { useNavigate } from 'react-router-dom';
 const SigninSchema = Yup.object().shape({
     email: Yup.string()
         .email('รูปแบบอีเมลล์ไม่ถูกต้อง')
@@ -21,6 +22,7 @@ const SigninSchema = Yup.object().shape({
 export default function Login() {
     const [message, setMessage] = useState('');
     const{login} = useAuth();
+    const navigate = useNavigate();
     return (
         <>
             <div className="flex flex-col md:flex-row min-h-screen">
@@ -54,7 +56,10 @@ export default function Login() {
                                     setMessage(respone.message || respone.error)
                                     // set token login , resp users
                                     login(respone.token, respone.users);
-                                    
+                                    if(respone.users.usertype == 0){
+                                        navigate("/")
+                                    }
+                                    navigate("/admin/dashboard");
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (

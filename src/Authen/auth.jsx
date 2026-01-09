@@ -10,11 +10,6 @@ export const AuthProvider = ({ children }) => {
   const login = (token, userData) => {
     setToken(token);
     setUser(userData);
-    localStorage.setItem("token", token);
-    if(setToken(token) == null){
-        localStorage.removeItem("token");
-        navigate("/")
-    }
   };
 
   const logout = () => {

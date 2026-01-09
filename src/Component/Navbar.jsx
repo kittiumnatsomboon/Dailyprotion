@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
+import { useAuth } from "../Authen/auth";
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navLinks = [
@@ -10,6 +11,7 @@ export default function Navbar() {
         { name: 'สมัครสมาชิก', href: '/register' },
         { name: 'เข้าสู่ระบบ', href: '/login' },
     ];
+    const{login , logout} = useAuth();
     return (
         <>
             <nav className="bg-gradient-to-r from-violet-500 to-violet-900 p-4">
