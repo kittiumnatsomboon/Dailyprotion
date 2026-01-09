@@ -50,6 +50,8 @@ export default function Login() {
                                     })
                                     const respone = await res.json();
                                     setMessage(respone.message || respone.error)
+                                    // Set ไว้ก่อนรอ Set Token usecontext
+                                    localStorage.setItem("token",respone.token)
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
@@ -85,7 +87,7 @@ export default function Login() {
                                                 <div className="text-red-500">{errors.password}</div>
                                             ) : null}
                                             <div className="pb-2 text-center text-green-500">
-                                                {message}
+                                                <p className="pb-4">{message}</p>
                                                 <Button name="btnregister" type="submit">
                                                     เข้าสู่ระบบ
                                                 </Button>
