@@ -14,7 +14,9 @@ app.use(cors({
 
 // Register API
 app.use('/api/register/',require('./api/Register/Register'))
-
+// Login API
+app.use('/api/login/',require('./api/Login/Login'))
+// Index path
 app.get('/', (req, res) => {
   res.json({ message: 'Data from secure API!' });
 });

@@ -48,8 +48,7 @@ export default function Login() {
                                         },
                                         body: JSON.stringify(values)
                                     })
-                                    const respone = await res.json();
-                                    setMessage(respone.message || respone.error)
+                                    // const respone = await res.json();
 
                                 }}
                             >
@@ -95,8 +94,8 @@ export default function Login() {
                                                 </div>
                                                 <div>
                                                     {/* Google login */}
-                                                    <Googlebutton/>
-                                                    <Facebookbutton/>
+                                                    <Googlebutton />
+                                                    <Facebookbutton />
                                                 </div>
                                             </div>
 
