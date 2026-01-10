@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
     if (storedToken) {
       try {
         const decoded = jwtDecode(storedToken);
-
         // check token expire
         if (decoded.exp * 1000 < Date.now()) {
           localStorage.removeItem("token");
