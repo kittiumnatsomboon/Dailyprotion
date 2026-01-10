@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
+import {  useState } from "react";
 import { useAuth } from "../Authen/auth";
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,6 +9,7 @@ export default function Navbar() {
         { name: 'เกี่ยวกับเรา', href: '/about' },
         { name: 'ติดต่อเรา', href: '/contact' },
     ];
+
     const { user, logout } = useAuth();
     return (
         <>
