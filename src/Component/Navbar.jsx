@@ -2,7 +2,6 @@ import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 import { useState } from "react";
 import { useAuth } from "../Authen/auth";
-import Dropdown from "./Dropdown";
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navLinks = [
@@ -11,6 +10,10 @@ export default function Navbar() {
         { name: 'ติดต่อเรา', href: '/contact' },
     ];
 
+    const Dropdownmenu = [
+        { id: 1, label: "บัญชีผู้ใช้งาน", link: "/account" },
+        { id: 2, label: "Create Post", link: "/createpost" },
+    ]
     const { user, logout } = useAuth();
     const [opendropdown, setopendropdown] = useState(false);
     const toggledropdown = () => {
@@ -53,7 +56,17 @@ export default function Navbar() {
                                         className="p-20 absolute right-0 mt-2 w-48 rounded-md
                                         bg-black text-white shadow-lg py-1 z-50"
                                     >
-                                        <Dropdown closeDropdown={() => setOpendropdown(false)} />
+                                        {Dropdownmenu.map((item) => (
+                                            <li>
+                                                <Link
+                                                    to={item.link}
+                                                    className="block px-4 py-2 text-sm text-gray-700
+                                                        hover:bg-gray-100 transition"
+                                                    >
+                                                    {item.label}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 )}
                             </>
