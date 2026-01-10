@@ -1,7 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
-import {  useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../Authen/auth";
+import Dropdown from "./Dropdown";
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navLinks = [
@@ -11,6 +12,10 @@ export default function Navbar() {
     ];
 
     const { user, logout } = useAuth();
+    const [opendropdown, setopendropdown] = useState(false);
+    const toggledropdown = () => {
+        setopendropdown(!opendropdown);
+    }
     return (
         <>
             <nav className="bg-gradient-to-r from-violet-500 to-violet-900 p-4">
@@ -23,20 +28,34 @@ export default function Navbar() {
                     {/* Desktop Menu (hidden on mobile) */}
                     <div className="hidden md:flex space-x-4">
                         {navLinks.map((link) => (
-                            <a
+                            <Link
                                 key={link.name}
                                 href={link.href}
                                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >
                                 {link.name}
-                            </a>
+                            </Link>
                         ))}
                         {user ? (
                             <>
                                 {/* Display the user's name */}
-                                <Link to=""
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                >{user.firstname}</Link>
+                                <Link
+                                    to="#"
+                                    onClick={toggledropdown}
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white
+                                        px-3 py-2 rounded-md text-sm font-medium"
+                                >
+                                    {user.firstname}
+                                </Link>
+
+                                {opendropdown && (
+                                    <ul
+                                        className="p-20 absolute right-0 mt-2 w-48 rounded-md
+                                        bg-black text-white shadow-lg py-1 z-50"
+                                    >
+                                        <Dropdown closeDropdown={() => setOpendropdown(false)} />
+                                    </ul>
+                                )}
                             </>
                         ) : (
                             <>
