@@ -38,7 +38,6 @@ export default function Register() {
     const [startDate, setStartDate] = useState(new Date());
     const handleDateChange = (date) => {
         setStartDate(date);
-        console.log(startDate)
     };
     const [message, setMessage] = useState('');
     return (

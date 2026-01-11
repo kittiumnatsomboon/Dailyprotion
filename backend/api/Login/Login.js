@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
     const { email, password } = req.body;
     try {
         const [result] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-        console.log(result)
         if (result.length > 0) {
             const user = result[0];
             // Compare the hashed password

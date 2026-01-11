@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../Connectmysql')
+const pool = require('../Connectmysql');
+const authMiddleware = require('../authMiddleware');
 
 
-
-router.get('/',async(req,res)=>{
-    res.json({message:"HELLO"})
+router.get('/', authMiddleware, (req, res, next) => {
+    const userProfile = {
+        userid: req.user.userid,
+        email: req.user.email,
+        firstname: req.user.firstname,
+        lastname: req.user.lastname,
+        usertype: req.user.usertype
+        // ... other profile details
+    };
+    res.status(200).json(userProfile);
 })
 
 module.exports = router;
