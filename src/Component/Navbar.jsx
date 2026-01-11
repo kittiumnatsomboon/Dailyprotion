@@ -2,20 +2,28 @@ import { Link, Outlet } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 import { useState } from "react";
 import { useAuth } from "../Authen/auth";
-export default function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navLinks = [
-        { name: 'หน้าแรก', href: '/' },
-        { name: 'เกี่ยวกับเรา', href: '/about' },
-        { name: 'ติดต่อเรา', href: '/contact' },
-    ];
 
-    const Dropdownmenu = [
-        { id: 1, label: "บัญชีผู้ใช้งาน", link: "/account" },
-        { id: 2, label: "Create Post", link: "/createpost" },
-    ]
+// Dropdown menu after login
+const Dropdownmenu = [
+    { id: 1, label: "บัญชีผู้ใช้งาน", link: "/account" },
+    { id: 2, label: "Create Post", link: "/createpost" },
+]
+
+// navbar menu
+const navLinks = [
+    { name: 'หน้าแรก', href: '/' },
+    { name: 'เกี่ยวกับเรา', href: '/about' },
+    { name: 'ติดต่อเรา', href: '/contact' },
+];
+export default function Navbar() {
+    // toggle open
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // auth login logout
     const { user, logout } = useAuth();
+    // open dropdown
     const [opendropdown, setopendropdown] = useState(false);
+    // toggle function opendropdown
     const toggledropdown = () => {
         setopendropdown(!opendropdown);
     }
@@ -25,7 +33,7 @@ export default function Navbar() {
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Logo/Brand */}
                     <a href="/" className="text-white text-lg font-semibold">
-                        Daily-today
+                        บันทึกประจำวัน
                     </a>
 
                     {/* Desktop Menu (hidden on mobile) */}
@@ -34,7 +42,7 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                className="text-gray-300 hover:bg-white hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                             >
                                 {link.name}
                             </Link>
@@ -46,12 +54,12 @@ export default function Navbar() {
                                     <Link
                                         to="#"
                                         onClick={toggledropdown}
-                                        className="relative inline-block text-gray-300 hover:bg-gray-700 hover:text-white
+                                        className="relative inline-block text-gray-300 hover:bg-white hover:text-black
                                             px-3 py-2 rounded-md text-sm font-medium"
                                     >
                                         {user.firstname}
                                     </Link>
-                                    
+
                                     {opendropdown && (
                                         <ul
                                             className="absolute top-full mt-2 w-48  rounded-md shadow-lg r
@@ -60,15 +68,20 @@ export default function Navbar() {
                                             "
                                         >
                                             {Dropdownmenu.map((item) => (
-                                                <li>
+                                                <li key={item.id}>
                                                     <Link
                                                         to={item.link}
                                                         className="block px-4 py-2 text-sm transition"
-                                                        >
+                                                    >
                                                         {item.label}
                                                     </Link>
                                                 </li>
                                             ))}
+                                            <button type="submit"
+                                                onClick={logout}
+                                                className="block px-4 py-2 text-sm transition">
+                                                Logout
+                                            </button>
                                         </ul>
                                     )}
                                 </div>
@@ -113,9 +126,33 @@ export default function Navbar() {
                         {user ? (
                             <>
                                 {/* Display the user's name */}
-                                <Link to=""
-                                    className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-                                >{user.firstname}</Link>
+                                <div className="relative">
+                                    <Link to="" onClick={toggledropdown}
+                                        className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                                    >{user.firstname}</Link>
+                                    {opendropdown && (
+                                        <ul className="absolute top-full mt-2 w-full  rounded-md shadow-lg r
+                                            ing-1 ring-black ring-opacity-5 bg-gradient-to-r from-violet-500 to-violet-900
+                                            text-white 
+                                            ">
+                                            {Dropdownmenu.map((item) => (
+                                                <li key={item.id}>
+                                                    <Link
+                                                        to={item.link}
+                                                        className="block hover:bg-gray-700 hover:text-white px-4 py-2 text-sm transition"
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                            <button type="submit"
+                                                onClick={logout}
+                                                className="block text-left hover:bg-gray-700 w-full hover:text-white px-4 py-2 text-sm transition">
+                                                Logout
+                                            </button>
+                                        </ul>
+                                    )}
+                                </div>
                             </>
                         ) : (
                             <>
