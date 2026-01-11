@@ -25,14 +25,7 @@ router.post('/', async (req, res) => {
                 const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
                 res.status(201).json({
                     message: 'เข้าสู่ระบบสำเร็จ', 
-                    token,
-                    users: {
-                        userid: user.userid,
-                        email: user.email,
-                        firstname: user.firstname,
-                        lastname: user.lastname,
-                        usertype: user.usertype
-                    }
+                    token
                 });
             } else {
                 res.status(401).json({ message: 'Invalid credentials' });

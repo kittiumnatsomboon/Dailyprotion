@@ -55,11 +55,8 @@ export default function Login() {
                                     const respone = await res.json();
                                     setMessage(respone.message || respone.error)
                                     // set token login , resp users
-                                    login(respone.token, respone.users);
-                                    if(respone.users.usertype == 0){
-                                        navigate("/")
-                                    }
-                                    navigate("/admin/dashboard");
+                                    login(respone.token);
+                                    navigate("/")
                                 }}
                             >
                                 {({ errors, touched, values, setFieldValue }) => (
