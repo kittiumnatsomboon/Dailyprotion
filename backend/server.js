@@ -16,6 +16,8 @@ app.use('/api/connectdb/',require('./api/Testconnection'))
 app.use('/api/register/',require('./api/Register/Register'))
 // Login API
 app.use('/api/login/',require('./api/Login/Login'))
+// Account API
+app.use('/api/account/',require('./api/Account/Account'))
 // Index path
 app.get('/', (req, res) => {
   res.json({ message: 'Data from secure API!' });
