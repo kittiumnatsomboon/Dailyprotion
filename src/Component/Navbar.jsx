@@ -42,33 +42,36 @@ export default function Navbar() {
                         {user ? (
                             <>
                                 {/* Display the user's name */}
-                                <Link
-                                    to="#"
-                                    onClick={toggledropdown}
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white
-                                        px-3 py-2 rounded-md text-sm font-medium"
-                                >
-                                    {user.firstname}
-                                </Link>
-
-                                {opendropdown && (
-                                    <ul
-                                        className="p-20 absolute right-0 mt-2 w-48 rounded-md
-                                        bg-black text-white shadow-lg py-1 z-50"
+                                <div className="relative inline-block">
+                                    <Link
+                                        to="#"
+                                        onClick={toggledropdown}
+                                        className="relative inline-block text-gray-300 hover:bg-gray-700 hover:text-white
+                                            px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        {Dropdownmenu.map((item) => (
-                                            <li>
-                                                <Link
-                                                    to={item.link}
-                                                    className="block px-4 py-2 text-sm text-gray-700
-                                                        hover:bg-gray-100 transition"
-                                                    >
-                                                    {item.label}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                                        {user.firstname}
+                                    </Link>
+                                    
+                                    {opendropdown && (
+                                        <ul
+                                            className="absolute top-full mt-2 w-48  rounded-md shadow-lg r
+                                            ing-1 ring-black ring-opacity-5 bg-gradient-to-r from-violet-500 to-violet-900
+                                            text-white
+                                            "
+                                        >
+                                            {Dropdownmenu.map((item) => (
+                                                <li>
+                                                    <Link
+                                                        to={item.link}
+                                                        className="block px-4 py-2 text-sm transition"
+                                                        >
+                                                        {item.label}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
                             </>
                         ) : (
                             <>
