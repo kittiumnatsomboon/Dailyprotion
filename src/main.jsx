@@ -11,6 +11,7 @@ import Register from './Pages/Register';
 import Footer from './Pages/Footer';
 import { AuthProvider } from './Authen/auth';
 import AdminDashboard from './Pages/Controller/AdminDashboard';
+import Dashboard from './Component/Dashboard';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -22,7 +23,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="contact" element={<Contact />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          
+          <Route path="dashboard" element={<Dashboard />} />
+
+          {/* Admin */}
           <Route path="admin/dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>

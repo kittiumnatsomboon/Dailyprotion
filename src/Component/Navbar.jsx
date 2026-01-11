@@ -5,7 +5,7 @@ import { useAuth } from "../Authen/auth";
 
 // Dropdown menu after login
 const Dropdownmenu = [
-    { id: 1, label: "บัญชีผู้ใช้งาน", link: "/account" },
+    { id: 1, label: "บัญชีผู้ใช้งาน", link: "/dashboard" },
     { id: 2, label: "Create Post", link: "/createpost" },
 ]
 
