@@ -10,7 +10,8 @@ router.get('/', authMiddleware, (req, res, next) => {
         email: req.user.email,
         firstname: req.user.firstname,
         lastname: req.user.lastname,
-        usertype: req.user.usertype
+        usertype: req.user.usertype,
+        userimage: req.user.userimage
         // ... other profile details
     };
     res.status(200).json(userProfile);

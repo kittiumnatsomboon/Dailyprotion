@@ -10,20 +10,7 @@ CREATE TABLE users(
     UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     DELETED_AT DATETIME 
 )ENGINE=InnoDB;
--- user images table
-CREATE TABLE userimage(
-    imageid INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    nameimage varchar(255) NOT NULL,
-    pathimage varchar(255) NOT NULL,
-    user_id int(6),
-    FOREIGN KEY (user_id) 
-    REFERENCES users(userid)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION
-    CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UPDATED_AT DATETIME,
-    DELETED_AT DATETIME
-)ENGINE=InnoDB;
+
 
 
 -- 29ลงไปยังไม่ได้สร้างตารางรอ FK Case , Restric, NO ACTION

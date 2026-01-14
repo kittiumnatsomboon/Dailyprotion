@@ -33,6 +33,7 @@ export default function Dashboard() {
 
                 const data = await response.json();
                 setProfile(data);
+                
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -58,6 +59,7 @@ export default function Dashboard() {
                 <p>Name: {profile.firstname}</p>
                 <p>lastname: {profile.lastname}</p>
                 <p>Email: {profile.email}</p>
+                <p>Image:{profile.userimage}</p>
                 {/* Render other profile details */}
             </div>
         </>

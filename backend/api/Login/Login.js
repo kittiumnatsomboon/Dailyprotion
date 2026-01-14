@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
                     email: user.email,
                     firstname: user.firstname,
                     lastname: user.lastname,
-                    usertype: user.usertype // e.g., 'admin', 'user'
+                    usertype: user.usertype,
+                    userimage:user.userimage
                 };
                 // 3. Sign the token
                 const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
