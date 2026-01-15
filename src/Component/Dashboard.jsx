@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import Imagebackground from "./Imagebackground";
 export default function Dashboard() {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ export default function Dashboard() {
 
                 const data = await response.json();
                 setProfile(data);
-                
+
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -54,14 +55,11 @@ export default function Dashboard() {
     }
     return (
         <>
+            <Imagebackground textinformation="Infromation"/>
             <div>
-                <h1>User Profile</h1>
-                <p>Name: {profile.firstname}</p>
-                <p>lastname: {profile.lastname}</p>
-                <p>Email: {profile.email}</p>
-                <p>Image:{profile.userimage}</p>
-                {/* Render other profile details */}
+                ข้อมูล
             </div>
+
         </>
     )
 }
