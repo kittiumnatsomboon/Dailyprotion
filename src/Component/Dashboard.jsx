@@ -2,11 +2,17 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Imagebackground from "./Imagebackground";
 import Button from "./Butoon";
+import Inlineeditor from "./Inlineeditor";
+
 export default function Dashboard() {
+    // Display profile
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigator = useNavigate();
+
+    const save = (value) => { alert(value) }
+    const cancel = () => { alert("Cancelled") }
     useEffect(() => {
         const fetchProfile = async () => {
             // Retrieve the token from storage
@@ -54,6 +60,7 @@ export default function Dashboard() {
     if (error) {
         return <div>Error: {error}</div>;
     }
+    // GET Dateofbrith
     const dateofbirth = () => {
         const getdateofbirth = new Date(profile.Dateofbirth);
         const day = getdateofbirth.getDate();
@@ -63,6 +70,7 @@ export default function Dashboard() {
         return resount.join("/");
     }
 
+    // คำนวนอายุ
     const calculatedateofbirth = () => {
         const today = new Date();
         // วันเกิด (แปลงจาก "YYYY-MM-DD" หรือ "MM/DD/YYYY" โดยขึ้นอยู่กับรูปแบบที่รับมา)
@@ -98,11 +106,23 @@ export default function Dashboard() {
                 <div></div>
                 <div className="space-y-4">
                     <p className="text-2xl">Information</p>
-                    <p className="text-xl pt-4">ชื่อ:{profile.firstname}</p>
-                    <p className="text-xl pt-4">นามสกุล:{profile.lastname}</p>
-                    <p className="text-xl pt-4">วันเดือนปีเกิด:{dateofbirth()}</p>
+                    <div className="text-xl pt-4">
+                        ชื่อ:<Inlineeditor initialValue={profile.firstname}/>
+                    </div>
+                    <div className="text-xl pt-4">
+                        นามสกุล:<Inlineeditor initialValue={profile.lastname}/>
+                    </div>
+                    <div className="text-xl pt-4">
+                        วันเดือนปีเกิด:<Inlineeditor initialValue={dateofbirth()}/>
+                    </div>
+                    <div className="text-xl pt-4">
+                        อีเมลล์:<Inlineeditor initialValue={profile.email}/>
+                    </div>
+                    
                     <p className="text-xl pt-4">อายุปัจจุบัน:{calculatedateofbirth()}</p>
                     <Button name="update" type="submit" children="อัพเดทข้อมูล" />
+
+                    
                 </div>
                 <div></div>
             </div>

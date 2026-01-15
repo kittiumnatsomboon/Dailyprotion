@@ -54,7 +54,7 @@ export default function Navbar() {
                                     <Link
                                         to="#"
                                         onClick={toggledropdown}
-                                        className="relative inline-block text-gray-300 hover:bg-white hover:text-black
+                                        className="relative  inline-block text-gray-300 hover:bg-white hover:text-black
                                             px-3 py-2 rounded-md text-sm font-medium"
                                     >
                                         {user.firstname}
@@ -62,7 +62,7 @@ export default function Navbar() {
 
                                     {opendropdown && (
                                         <ul
-                                            className="absolute top-full mt-2 w-48  rounded-md shadow-lg r
+                                            className="absolute z-50 top-full mt-2 w-48  rounded-md shadow-lg r
                                             ing-1 ring-black ring-opacity-5 bg-gradient-to-r from-violet-500 to-violet-900
                                             text-white
                                             "
