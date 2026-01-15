@@ -99,6 +99,9 @@ export default function Dashboard() {
         }
         return `${y} ปี ${m} เดือน ${d} วัน`;
     }
+
+    
+
     return (
         <>
             <Imagebackground textinformation="Infromation" />

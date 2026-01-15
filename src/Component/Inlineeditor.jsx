@@ -25,7 +25,6 @@ export default function Inlineeditor({ initialValue }) {
                             className="peer bg-transparent h-10 w-72 rounded-lg text-gray-900 
                             placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" 
                             placeholder="Type inside me"
-                            on
                             />
                             <div className="pt-4">
                                 <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick={() => handleSave(value)} >
