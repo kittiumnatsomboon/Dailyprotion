@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Imagebackground from "./Imagebackground";
+import Button from "./Butoon";
 export default function Dashboard() {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -90,7 +91,6 @@ export default function Dashboard() {
         }
         return `${y} ปี ${m} เดือน ${d} วัน`;
     }
-    console.log(calculatedateofbirth());
     return (
         <>
             <Imagebackground textinformation="Infromation" />
@@ -102,9 +102,9 @@ export default function Dashboard() {
                     <p className="text-xl pt-4">นามสกุล:{profile.lastname}</p>
                     <p className="text-xl pt-4">วันเดือนปีเกิด:{dateofbirth()}</p>
                     <p className="text-xl pt-4">อายุปัจจุบัน:{calculatedateofbirth()}</p>
+                    <Button name="update" type="submit" children="อัพเดทข้อมูล" />
                 </div>
                 <div></div>
-
             </div>
         </>
     )
