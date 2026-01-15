@@ -11,7 +11,8 @@ router.get('/', authMiddleware, (req, res, next) => {
         firstname: req.user.firstname,
         lastname: req.user.lastname,
         usertype: req.user.usertype,
-        userimage: req.user.userimage
+        userimage: req.user.userimage,
+        Dateofbirth:req.user.Dateofbirth
         // ... other profile details
     };
     res.status(200).json(userProfile);

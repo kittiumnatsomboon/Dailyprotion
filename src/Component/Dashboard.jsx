@@ -53,13 +53,59 @@ export default function Dashboard() {
     if (error) {
         return <div>Error: {error}</div>;
     }
+    const dateofbirth = () => {
+        const getdateofbirth = new Date(profile.Dateofbirth);
+        const day = getdateofbirth.getDate();
+        const year = getdateofbirth.getFullYear();
+        const month = getdateofbirth.getMonth() + 1;
+        const resount = [day, year, month];
+        return resount.join("/");
+    }
+
+    const calculatedateofbirth = () => {
+        const today = new Date();
+        // วันเกิด (แปลงจาก "YYYY-MM-DD" หรือ "MM/DD/YYYY" โดยขึ้นอยู่กับรูปแบบที่รับมา)
+        // ตัวอย่างนี้รับรูปแบบ "YYYY-MM-DD"
+        const birthDate = new Date(profile.Dateofbirth);
+        // คำนวณความแตกต่างเป็นมิลลิวินาที
+        const diffMs = today.getTime() - birthDate.getTime();
+        // แปลงมิลลิวินาทีเป็นวัน
+        const dayMs = 1000 * 60 * 60 * 24;
+        const days = Math.floor(diffMs / dayMs);
+        // วิธีที่แม่นยำกว่า คือการใช้ปีเป็นหลักแล้วลดหลั่น
+        let y = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        let d = today.getDate() - birthDate.getDate();
+
+        // ปรับค่าถ้าเดือนหรือวันปัจจุบันน้อยกว่าวันเกิด
+        if (m < 0 || (m === 0 && d < 0)) {
+            y--;
+            m += 12;
+        }
+        if (d < 0) {
+            // ต้องรู้ว่าเดือนก่อนหน้ามีกี่วัน
+            const daysInPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            d += daysInPrevMonth;
+            m--;
+        }
+        return `${y} ปี ${m} เดือน ${d} วัน`;
+    }
+    console.log(calculatedateofbirth());
     return (
         <>
-            <Imagebackground textinformation="Infromation"/>
-            <div>
-                ข้อมูล
-            </div>
+            <Imagebackground textinformation="Infromation" />
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+                <div></div>
+                <div className="space-y-4">
+                    <p className="text-2xl">Information</p>
+                    <p className="text-xl pt-4">ชื่อ:{profile.firstname}</p>
+                    <p className="text-xl pt-4">นามสกุล:{profile.lastname}</p>
+                    <p className="text-xl pt-4">วันเดือนปีเกิด:{dateofbirth()}</p>
+                    <p className="text-xl pt-4">อายุปัจจุบัน:{calculatedateofbirth()}</p>
+                </div>
+                <div></div>
 
+            </div>
         </>
     )
 }
